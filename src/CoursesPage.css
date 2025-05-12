@@ -1,0 +1,158 @@
+/* Variables de color */
+:root {
+    --standard: #121925;
+    --subtle: #677988;
+    --neutral-8: rgba(235, 237, 240, 0.08);
+    --white: #FFFFFF;
+    --blue: #0A6CFF;
+  }
+  
+  /* Tipografía global */
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--standard);
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0;
+    background: #ebebeb; 
+  }
+  
+  /* Evitar centrado */
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  h1, h4 {
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  /* Contenedor principal */
+  .container {
+    display: grid;
+    grid-template-areas:
+    "nav header"
+    "nav main";
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 8px 32px;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Sidebar */
+  .nav {
+    grid-area: nav;
+    background: #971D20;
+    padding: 32px 16px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .nav__logo {
+    display: block;
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+  
+  .nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav ul li {
+    padding: 8px 16px;
+    border-radius: 3px;
+    color: var(--white);
+    background: rgba(18, 25, 37, 0.16);
+    cursor: pointer;
+  }
+  
+  .nav ul li.active {
+    background: rgba(231, 234, 240, 0.24);
+  }
+  
+  /* Cabecera */
+  .page-header {
+    grid-area: header;
+    padding: 40px 0 24px;
+    align-self: end;
+  }
+  
+  /* Tabs */
+  .tab {
+    grid-area: tabs;
+    padding-bottom: 24px;
+  }
+  
+  .tab__list {
+    border-bottom: 1px solid var(--neutral-8);
+  }
+  
+  .tab__list .tab__item {
+    display: inline-block;
+    color: var(--subtle);
+    margin-right: 32px;
+    padding-bottom: 4px;
+  }
+  
+  .tab__list .tab__item.active {
+    color: var(--standard);
+    border-bottom: 2px solid var(--standard);
+  }
+  
+  /* Tarjetas */
+  .card-container {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding-bottom: 32px;
+    padding-right: 32px;
+    overflow-y: auto;
+  }
+  
+  /* Tarjeta */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--neutral-8);
+    border-radius: 4px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  
+  .card:hover {
+    box-shadow: 0 2px 4px rgba(103, 121, 136, 0.16);
+    transform: translateY(-2px);
+  }
+  
+  .card:hover h3 {
+    color: var(--blue);
+  }
+  
+  .card__inner {
+    padding: 16px;
+  }
+  
+  .card__header {
+    margin-bottom: 8px;
+  }
+  
+  .card__header--term {
+    font-size: 12px;
+    color: var(--subtle);
+    margin-bottom: 8px;
+  }
+  
+  .card__body {
+    margin-bottom: 16px;
+  }
+  
+  .card__body p {
+    color: var(--subtle);
+  }
+  
