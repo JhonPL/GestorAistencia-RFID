@@ -28,26 +28,53 @@ const themes = [
         background: "#231F20",
         color: "#FFF",
         primaryColor: "#BB4430"
+    },
+    {
+        background: "#7FFFD4",        
+        color: "#003333",             
+        primaryColor: "#7fba27"
     }
 ];
+let currentThemeIndex = 0;
+let autoThemeInterval = null;
 
 const setTheme = (theme) => {
     const root = document.querySelector(":root");
     root.style.setProperty("--background", theme.background);
     root.style.setProperty("--color", theme.color);
     root.style.setProperty("--primary-color", theme.primaryColor);
-    root.style.setProperty("--glass-color", theme.glassColor);
 };
 
-const displayThemeButtons = () => {
+const displayThemeButtons = (onThemeClick) => {
     const btnContainer = document.querySelector(".theme-btn-container");
-    themes.forEach((theme) => {
+    if (!btnContainer) return;
+    btnContainer.innerHTML = ""; // Limpia antes de agregar
+    themes.forEach((theme, idx) => {
         const div = document.createElement("div");
         div.className = "theme-btn";
         div.style.cssText = `background: ${theme.background}; width: 25px; height: 25px`;
         btnContainer.appendChild(div);
-        div.addEventListener("click", () => setTheme(theme));
+        div.addEventListener("click", () => {
+            setTheme(theme);
+            stopAutoTheme();
+            if (onThemeClick) onThemeClick(idx);
+        });
     });
 };
 
-displayThemeButtons();
+function startAutoTheme(intervalMs = 5000) {
+    stopAutoTheme();
+    autoThemeInterval = setInterval(() => {
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        setTheme(themes[currentThemeIndex]);
+    }, intervalMs);
+}
+
+function stopAutoTheme() {
+    if (autoThemeInterval) {
+        clearInterval(autoThemeInterval);
+        autoThemeInterval = null;
+    }
+}
+
+export { displayThemeButtons, startAutoTheme, stopAutoTheme, setTheme, themes };

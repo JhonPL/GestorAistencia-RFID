@@ -1,3 +1,4 @@
+import React from "react";
 import "./CoursesPage.css";
 
 const courses = [
@@ -52,7 +53,7 @@ const courses = [
   },
 ];
 
-export default function MyCourses() {
+export const CoursesPage = () => {
   return (
     <div className="container">
       <nav className="nav">

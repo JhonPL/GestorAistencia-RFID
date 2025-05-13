@@ -1,9 +1,12 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { displayThemeButtons, startAutoTheme } from './themes.js';
 import './LoginPage.css';
 
-
-
-export function LoginPage() {
+export const LoginPage = () => {
+    useEffect(() => {
+        displayThemeButtons();
+        startAutoTheme(5000); // Cambia cada 5 segundos
+    }, []);
     return (
         <>
             <div className="main-container">
@@ -16,11 +19,9 @@ export function LoginPage() {
                             <form>
                                 <input type="text" placeholder="USERNAME" />
                                 <input type="password" placeholder="PASSWORD" />
-                                <button className="opacity">SUBMIT</button>
+                                <button className="opacity">Iniciar Sesión</button>
                             </form>
                             <div className="register-forget opacity">
-                                <a href="">REGISTER</a>
-                                <a href="">FORGOT PASSWORD</a>
                             </div>
                         </div>
                         <div className="circle circle-two"></div>
