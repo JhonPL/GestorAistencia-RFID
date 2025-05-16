@@ -13,6 +13,7 @@ app.post('/registrar-asistencia', async (req, res) => {
   const diaSemana = now.getDay(); // 2 = martes
   const horaActual = now.toTimeString().slice(0, 8); // '14:30:00'
   const fechaActual = now.toISOString().split('T')[0]; // '2025-03-11'
+
   // const now = new Date();
   // const diaSemana = now.getDay(); // 0=Domingo, 1=Lunes...
   // const horaActual = now.toTimeString().slice(0, 8); // 'HH:MM:SS'
@@ -70,14 +71,12 @@ app.post('/registrar-asistencia', async (req, res) => {
   console.log("🛠️ Datos recibidos:", req.body);
 });
 
-
-
 /// Tarea automática de inasistencia ///
 
 const cron = require('node-cron');
 
 cron.schedule('*/10 * * * *', async () => {
-  console.log('⏱ Ejecutando tarea automática de inasistencia...');
+  console.log('Ejecutando tarea automática de inasistencia...');
 
   const now = new Date();
   const diaSemana = now.getDay();
@@ -113,9 +112,9 @@ cron.schedule('*/10 * * * *', async () => {
       }
     }
 
-    console.log('✅ Inasistencias registradas automáticamente.');
+    console.log('Inasistencias registradas automáticamente.');
   } catch (error) {
-    console.error('❌ Error en tarea automática de asistencia:', error);
+    console.error('Error en tarea automática de asistencia:', error);
   }
 });
 
