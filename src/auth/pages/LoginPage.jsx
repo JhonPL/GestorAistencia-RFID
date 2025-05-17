@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { displayThemeButtons, startAutoTheme } from './themes.js';
-import './LoginPage.css';
+import { displayThemeButtons, startAutoTheme } from './themes';
+import "./LoginPage.css";
 
 export const LoginPage = () => {
     useEffect(() => {
         displayThemeButtons();
-        startAutoTheme(5000); // Cambia cada 5 segundos
+        startAutoTheme(5000);
     }, []);
     return (
         <>

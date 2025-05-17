@@ -1,5 +1,3 @@
-
-
 :root {
     --background: #1a1a2e;
     --color: #ffffff;
@@ -45,8 +43,10 @@ h1 {
 }
 
 .login-container {
-    position: relative;
-    width: 22.2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .form-container {
     border: 1px solid hsla(0, 0%, 65%, 0.158);

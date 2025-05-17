@@ -164,6 +164,36 @@ cron.schedule('*/10 * * * *', async () => {
 //   }
 // });
 
+app.post('/login', async (req, res) => {
+  const { correo, password } = req.body;
+
+  try {
+    const result = await pool.query(
+      'SELECT * FROM Docente WHERE correo = $1 AND contraseña = crypt($2, contraseña)',
+      [correo, password]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({ mensaje: 'Correo o contraseña incorrectos' });
+    }
+
+    // Usuario autenticado exitosamente
+    const docente = result.rows[0];
+    // Aquí puedes generar un token JWT o sesión, por ejemplo
+
+    res.json({ mensaje: 'Login exitoso', docente });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error en el servidor' });
+  }
+});
+
+app.get('/api/cursos', async (req, res) => {
+  const docenteId = req.query.docenteId;
+  // Busca los cursos del docente en la base de datos...
+  // Devuelve un array de cursos
+});
+
 
 
 const PORT = 3000;
