@@ -1,59 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./CoursesPage.css";
+import { AuthContext } from "../auth/context";
 
-const courses = [
-  {
-    term: "Spring 2018",
-    title: "Computer-Based Info Systems",
-    code: "MIS 1883-002",
-    date: "January 14 - May 4, 2018",
-    time: "MW 1 - 2:45 pm",
-  },
-  {
-    term: "Spring 2018",
-    title: "Computer-Based Info Systems",
-    code: "MIS 1883-002",
-    date: "January 14 - May 4, 2018",
-    time: "MW 1 - 2:45 pm",
-  },
-  {
-    term: "Spring 2018",
-    title: "Computer-Based Info Systems",
-    code: "MIS 1883-002",
-    date: "January 14 - May 4, 2018",
-    time: "MW 1 - 2:45 pm",
-  },
-  {
-    term: "Spring 2018",
-    title: "Computer-Based Info Systems",
-    code: "MIS 1883-002",
-    date: "January 14 - May 4, 2018",
-    time: "MW 1 - 2:45 pm",
-  },
-  {
-    term: "Spring 2018",
-    title: "Computer-Based Info Systems",
-    code: "MIS 1883-002",
-    date: "January 14 - May 4, 2018",
-    time: "MW 1 - 2:45 pm",
-  },
-  {
-    term: "Spring 2018",
-    title: "Computer-Based Info Systems",
-    code: "MIS 1883-002",
-    date: "January 14 - May 4, 2018",
-    time: "MW 1 - 2:45 pm",
-  },
-  {
-    term: "Spring 2018",
-    title: "Computer-Based Info Systems",
-    code: "MIS 1883-002",
-    date: "January 14 - May 4, 2018",
-    time: "MW 1 - 2:45 pm",
-  },
-];
 
 export const CoursesPage = () => {
+  const {user} = useContext(AuthContext);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    if (!user) return;
+    fetch(`http://localhost:3000/api/cursos?docenteId=${user.id}`)
+      .then((res) => res.json())
+      .then ((data) => setCourses(data.cursos || []));
+  }, [user]);
+
+  
   return (
     <div className="container">
       <nav className="nav">

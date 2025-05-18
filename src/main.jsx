@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { LoginPage } from './auth/pages/index.js';
-import { CoursesPage } from './pages/CoursesPage.jsx';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+//import { AuthProvider } from "./auth/context/AuthProvider";
+import { RfidApp } from "./RfidApp";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LoginPage  />
-  </StrictMode>,
-)
+    <BrowserRouter>
+        <RfidApp />
+    </BrowserRouter>
+  </StrictMode>
+);

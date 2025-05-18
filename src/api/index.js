@@ -164,34 +164,41 @@ cron.schedule('*/10 * * * *', async () => {
 //   }
 // });
 
+
+
 app.post('/login', async (req, res) => {
-  const { correo, password } = req.body;
+  const { correo, contrasena } = req.body;
 
   try {
     const result = await pool.query(
-      'SELECT * FROM Docente WHERE correo = $1 AND contraseña = crypt($2, contraseña)',
-      [correo, password]
+      'SELECT * FROM docente WHERE correo = $1 AND contrasena = crypt($2, contrasena)',
+      [correo, contrasena]
     );
 
-    if (result.rows.length === 0) {
-      return res.status(401).json({ mensaje: 'Correo o contraseña incorrectos' });
+    if (result.rows.length > 0) {
+      res.json({ mensaje: 'Login exitoso', docente: result.rows[0] });
+    } else {
+      res.status(401).json({ mensaje: 'Usuario o contraseña incorrectos' });
     }
-
-    // Usuario autenticado exitosamente
-    const docente = result.rows[0];
-    // Aquí puedes generar un token JWT o sesión, por ejemplo
-
-    res.json({ mensaje: 'Login exitoso', docente });
   } catch (error) {
-    console.error(error);
+    console.error('Error al realizar el login:', error);
     res.status(500).json({ mensaje: 'Error en el servidor' });
   }
 });
 
+
+
 app.get('/api/cursos', async (req, res) => {
   const docenteId = req.query.docenteId;
-  // Busca los cursos del docente en la base de datos...
-  // Devuelve un array de cursos
+  try {
+    const result = await pool.query(
+      'SELECT * FROM Curso WHERE docente_id = $1',
+      [docenteId]
+    );
+    res.json({ cursos: result.rows });
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener cursos' });
+  }
 });
 
 
